@@ -5,26 +5,23 @@ import { useEffect} from "react"
 
 // Action Defs
 const GET_ITEMS = "items/GET_ITEMS"
+const SHOW_CART = "cart/SHOW_CART"
+// const AMOUNT_CART = "cart/AMOUNT_CART"
 const FILTER_ITEMS = "items/FILTER_ITEMS"
-const ADD_CART = "cart/ADD_CART"
-const REMOVE_CART = "cart/REMOVE_CART"
-const AMOUNT_CART = "cart/AMOUNT_CART"
 
 // Reducer
 const initalState = {
     items:[],
     cart: [],
-    filter:{}
+    // filter:{}
 }
 
 export default function reducer(state = initalState, action){
     switch (action.type){
         case GET_ITEMS:
             return { ...state, items: action.payload }
-        case ADD_CART:
-            return { ...state, cart: action.payload}
-        case REMOVE_CART:
-            return { ...state, cart: action.payload}
+        case SHOW_CART:
+            return { ...state, cart: action.payload} 
         default: 
             return state
     }
@@ -42,32 +39,62 @@ function grabItems(){
         })
     }
 }
-function addToCart(){
+function addToCart(item){
     return dispatch =>{
-        Axios.post("/cart").then(resp =>{
+        Axios.post("/cart", {item}).then(resp =>{
+            dispatch(showCart(resp.data))
+        })
+    }
+}
+function showCart(){
+    return dispatch =>{
+        Axios.get("/cart").then(resp=>{
             dispatch({
-                type:ADD_CART,
+                type:SHOW_CART,
                 payload: resp.data
             })
         })
     }
 }
-
-
+function removeCart(id){
+    return dispatch =>{
+        Axios.delete(`/cart/${id}`).then(resp =>{
+            dispatch(showCart(resp.data))
+        })
+    }
+}
+// function filterItems(){
+//     return dispatch =>{
+//         Axios.get('/products').then(resp =>{
+//             dispatch({
+//                 type:FILTER_ITEMS,
+//                 payload: resp.data
+//             })
+//         })
+//     }
+// }
 // custom hook
 export function useItems(){
     const dispatch = useDispatch()
     const items = useSelector(appState => appState.cartReducer.items)
+    const cart = useSelector(appState => appState.cartReducer.cart)
     const add = item => dispatch(addToCart(item))
-    const fetch = () => dispatch(grabItems())
+    const remove = item => dispatch(removeCart(item))
 
     useEffect(()=>{
-        fetch()
-    },[])
-
-    return { items, add }
+        dispatch(grabItems())
+        dispatch(showCart())
+        // dispatch(filterItems())
+        
+    },[dispatch])
+    return { items, add, cart, remove }
 }
 
+
+// {
+//     type:ADD_CART,
+//     payload: resp.data
+// }
 // const ADD_ITEMS = "items/ADD_ITEMS"
 
       // case ADD_ITEMS:

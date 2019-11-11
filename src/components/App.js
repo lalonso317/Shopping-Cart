@@ -1,22 +1,20 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import "semantic-ui-css/semantic.min.css" 
 
-import 'normalize.css/normalize.css'
 import '../styles/cart.css'
 import store from '../redux/store'
 
 import Items from "./Items"
-import Cart from "./Cart"
 import Filters from "./Filters"
 
 
 function App(){
   return (
     <Provider store={store}>
-      <div>
+      <div className="all">
       <Filters />
-        <Items />
-        <Cart />
+      <Items /> 
       </div>
     </Provider>
   )
