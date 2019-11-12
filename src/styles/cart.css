@@ -2,7 +2,6 @@
 .all{
     display: flex;
     padding: 20px 0%;
-    /*max-width: 1200px;*/
     margin: 50px auto 0; 
 }
 
@@ -15,7 +14,6 @@
 .shop{
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
 }
 .imagegrid{
     display: flex;
@@ -23,20 +21,27 @@
     text-align: center;
     width: 24%;
     padding: 20px 0;
-    /* height: 200px; */
 }
 .shopimg{
     width: 200px;
     height: 370px;
 }
 .addcart{
-    width: 275px;
+    width: 245px;
     height: 50px;
-    margin: 0 0 0 35px;
+    margin: 0 0 0 5px;
     cursor: pointer;
     background: black;
     color: white;
     outline: none;
+}
+.wholeimg{
+    display: flex;
+    flex-direction: column;
+}
+.addcartcenter{
+    display: flex;
+    justify-content: center;
 }
 .imagegrid:hover{
     outline: 1px solid rgb(235,235,235);
@@ -47,20 +52,25 @@
 }
 .shipping{
     position: relative;
-    left: 214px;
+    left: 155px;
 }
 .free{
     background: black;
     color: white;
-    width: 125px;
-    height: 40px;
-    line-height: 40px;
+    width: 95px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px;
+    position: relative;
+    left: 45px;
 }
 .notfree{
     background: white;
     color: white;
-    width: 75px;
-    height: 40px;
+    width: 95px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px;
 }
 .dash{
     color: rgb(231,185,35);
@@ -70,7 +80,6 @@
 }
 .orderby{
     display: flex;
-    
 }
 /* //////// */
 /* FILTERS */
@@ -115,9 +124,9 @@ div > .sizes{
     display: flex;
     justify-content: flex-end;
 }
-/* .cartbutton{
-    display: flex;
-} */
+#cartbutton{
+    position: fixed;
+}
 .itemincart{
     display: flex;
     color:white;
@@ -133,9 +142,14 @@ div > .sizes{
 .subtotal{
     color: white;
 }
-#sidebar{
-    width: 550px;
-    position: absolute;
+.sidebar{
+    width: 650px;
+    position: fixed;
+}
+.ui.visible.right.overlay.sidebar {
+    position: fixed;
+    width: 450px;
+    transform: translate3d(0,0,0);
 }
 .wholebutton{
     display: flex;
@@ -160,4 +174,19 @@ div > .sizes{
 }
 .itemsincart{
     color: white;
+}
+.checkout{
+    width: 80%;
+    background: black;
+    color: grey;
+    cursor: pointer;
+    outline: none;
+    height: 40px;
+    border: none;
+    font-size: 25px;
+}
+.checkoutbutton{
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
 }

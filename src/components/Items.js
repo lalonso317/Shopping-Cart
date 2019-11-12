@@ -12,9 +12,7 @@ const [visible, setVisible] = useState(false)
   function handleClick(item){
     add(item)
   }
-// const installments = items.map(item =>{
-//     return (item.installments.toFixed(2))
-// })
+
 
   return (
     <div className="main"  >
@@ -27,7 +25,7 @@ const [visible, setVisible] = useState(false)
         secondary
       />
       </div>
-      <Sidebar.Pushable>
+      <Sidebar.Pushable className="slidebar">
         <Sidebar
           as={Menu}
           animation="overlay"
@@ -36,12 +34,11 @@ const [visible, setVisible] = useState(false)
           vertical
           visible={visible}
           direction="right"
-          id="sidebar"
-          className="slidingmenu"
+          className="slidingmenu slidebar"
         >
           <Cart />
         </Sidebar>
-        <Sidebar.Pusher>
+        <Sidebar.Pusher className="slidebar">
         <span className="orderby">
           <span>{items.length} Product(s) found.</span>
               <label htmlFor="select">Order by:</label>
@@ -54,17 +51,23 @@ const [visible, setVisible] = useState(false)
             <div className="shop" >
               {items.map((list,i) =>(
                 <div key={"item" + i}  className="imagegrid">
-                  <div>
+                  <div className="wholeimg">
                     <div className="shipping">
                       <p className={list.isFreeShipping === true ?  'free' : 'notfree'}>Free Shipping </p>
                     </div>
-                    <img alt="" className="shopimg" src={`/assets/${list.sku}_1.jpg`} />
+                    <div>
+                      <img alt="" className="shopimg" src={`/assets/${list.sku}_1.jpg`} />
+                    </div>
+                    <div>
+                      <span>{list.title}</span>
+                    </div>
+                      <p className="dash">—</p>
+                      <CurrencyFormat value={list.price} displayType={'text'}prefix={'$'} fixedDecimalScale={true} decimalScale={2} />
+                      <span> Or {( list.price/list.installments ).toFixed(2)} X {list.installments}</span>
+                  <div className="addcartcenter">
+                    <button className="addcart"  onClick={(e) => handleClick(list)}>Add to cart</button>
                   </div>
-                  <span>{list.title}</span>
-                  <CurrencyFormat value={list.price} displayType={'text'}prefix={'$'} fixedDecimalScale={true} decimalScale={2} />
-                  <p className="dash">—</p>
-                  {/* <span>{installments}</span> */}
-                  <button className="addcart"  onClick={(e) => handleClick(list)}>Add to cart</button>
+                </div>
                 </div>
               ))}
             </div>

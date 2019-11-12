@@ -33,17 +33,22 @@ var quantity = cart.map(item =>{
         </div>
         {cart.map((item,i) =>(
           <div key={"cart" + i} className="itemincart">
-            <span> <img alt="" src={`/assets/${item.item.sku}_2.jpg`} /></span>
-            <p>{item.item.title}</p>
-            <p>{quantity}</p>
-            <CurrencyFormat value={item.item.price} displayType={'text'}prefix={'$'} fixedDecimalScale={true} decimalScale={2} />
-            <button className="xbutton" onClick={(e) =>(handleClick(item.id))}>X</button>
+            <span> 
+              <img alt="" src={`/assets/${item.item.sku}_2.jpg`} />
+            </span>
+              <p>{item.item.title}</p>
+              <p>{quantity}</p>
+              <CurrencyFormat value={item.item.price} displayType={'text'}prefix={'$'} fixedDecimalScale={true} decimalScale={2} />
+              <button className="xbutton" onClick={(e) =>(handleClick(item.id))}>X</button>
           </div>
         ))}
         </div>
         <div className="totals">
           <p className="subtotal">SubTotal:</p>
           <p className="subtotal">$ {total.toFixed(2)}</p>
+        </div>
+        <div className="checkoutbutton">
+          <button className="checkout">Checkout</button>
         </div>
       </div>
     </div>

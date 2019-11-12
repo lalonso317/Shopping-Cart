@@ -63,16 +63,7 @@ function removeCart(id){
         })
     }
 }
-// function filterItems(){
-//     return dispatch =>{
-//         Axios.get('/products').then(resp =>{
-//             dispatch({
-//                 type:FILTER_ITEMS,
-//                 payload: resp.data
-//             })
-//         })
-//     }
-// }
+
 // custom hook
 export function useItems(){
     const dispatch = useDispatch()
@@ -90,6 +81,16 @@ export function useItems(){
     return { items, add, cart, remove }
 }
 
+// function filterItems(){
+//     return dispatch =>{
+//         Axios.get('/products').then(resp =>{
+//             dispatch({
+//                 type:FILTER_ITEMS,
+//                 payload: resp.data
+//             })
+//         })
+//     }
+// }
 
 // {
 //     type:ADD_CART,
